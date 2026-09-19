@@ -809,7 +809,7 @@
     // Sección activa: la última cuyo borde superior cruzó la mitad de la pantalla.
     // Se mide el pin-spacer de las secciones fijadas para respetar su recorrido extra.
     const secs = links.map((l) => $("#" + l.dataset.nav));
-    const endEl = $(".finale");
+    const endEl = $("#blog") || $(".finale"); // el blog ya no está en el nav
     const box = (el) => (el.parentElement && el.parentElement.classList.contains("pin-spacer") ? el.parentElement : el);
     const check = () => {
       const mid = window.innerHeight * 0.5;
