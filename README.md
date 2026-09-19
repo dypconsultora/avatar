@@ -5,10 +5,23 @@ Rediseño de [avatarinformatica.com](https://avatarinformatica.com/) como landin
 Sitio estático: HTML + CSS + JavaScript, sin paso de build.
 
 ```
-index.html
-assets/css/styles.css   tokens de diseño, modo día/noche, layout
-assets/js/main.js       animaciones (GSAP 3.15 desde jsDelivr)
+index.html                    landing
+aviso-legal.html              páginas internas (mismo header y footer)
+politica-de-privacidad.html
+politica-de-cookies.html
+mapa-del-sitio.html
+assets/css/styles.css         tokens de diseño, modo día/noche, layout
+assets/js/main.js             animaciones (GSAP 3.15 desde jsDelivr)
 assets/img/favicon.svg
+tools/generar-paginas.py      genera las páginas internas
+```
+
+## Páginas internas
+
+Las páginas legales y el mapa del sitio se generan desde `tools/generar-paginas.py`, que copia el nav, el menú mobile y el footer de `index.html`. Si cambiás alguno de esos bloques en la landing, regenerá las páginas:
+
+```bash
+python3 tools/generar-paginas.py
 ```
 
 ## Ver en local

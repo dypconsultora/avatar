@@ -59,6 +59,13 @@
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrambleTextPlugin, DrawSVGPlugin);
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const page = document.body.dataset.page || "home";
+  // El preloader se muestra una sola vez por sesión (no al volver desde una página interna)
+  let introSeen = false;
+  try {
+    introSeen = sessionStorage.getItem("avatar-intro") === "1";
+    sessionStorage.setItem("avatar-intro", "1");
+  } catch (e) { /* almacenamiento no disponible */ }
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const rnd = gsap.utils.random;
 
@@ -83,10 +90,12 @@
   function scrollToTarget(hash) {
     const target = hash === "#top" ? 0 : $(hash);
     if (target === null) return;
+    const pos = (target && target.dataset.scrollPos) || "top top";
     if (smoother) {
-      smoother.scrollTo(target, true, "top top");
+      smoother.scrollTo(target, true, pos);
     } else {
-      const y = target === 0 ? 0 : target.getBoundingClientRect().top + window.scrollY;
+      const off = parseInt(pos.split(" ")[1], 10) || 0;
+      const y = target === 0 ? 0 : target.getBoundingClientRect().top + window.scrollY - off;
       window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
     }
   }
@@ -730,6 +739,9 @@
       scrollTrigger: { trigger: ".finale", start: "top bottom", end: "bottom top", scrub: true },
     });
 
+  }
+
+  function footerAnim() {
     const fw = SplitText.create("#footer-word", { type: "chars", charsClass: "char" });
     gsap.from(fw.chars, {
       yPercent: 105, stagger: 0.05, ease: "expo.out", duration: 1.4,
@@ -739,6 +751,42 @@
       y: 40, opacity: 0, stagger: 0.08, duration: 1.2, ease: "expo.out",
       scrollTrigger: { trigger: ".footer", start: "top 85%", once: true },
     });
+  }
+
+  /* ---------------------------------------------------------
+     Páginas legales: índice fijo + sección activa + progreso
+     --------------------------------------------------------- */
+  function legal(mm) {
+    const links = $$("#toc a");
+    if (!links.length) return;
+    const secs = links.map((a) => $(a.getAttribute("href")));
+    const bar = $("#toc-bar");
+    secs.forEach((s, i) => {
+      ScrollTrigger.create({
+        trigger: s, start: "top 45%", end: "bottom 45%",
+        onToggle: (self) => { if (self.isActive) links.forEach((l, k) => l.classList.toggle("is-active", k === i)); },
+      });
+    });
+    ScrollTrigger.create({
+      trigger: ".legal__body", start: "top 45%", end: "bottom 55%",
+      onUpdate: (self) => gsap.set(bar, { scaleX: self.progress }),
+    });
+    mm.add("(min-width: 961px)", () => {
+      const aside = $(".legal__toc");
+      const body = $(".legal__body");
+      ScrollTrigger.create({
+        trigger: aside, start: "top 110px",
+        end: () => "+=" + Math.max(0, body.offsetHeight - aside.offsetHeight),
+        pin: true, pinSpacing: false, invalidateOnRefresh: true,
+      });
+    });
+    $$(".legal__sec").forEach((s) => {
+      gsap.from(s.children, {
+        y: 36, opacity: 0, duration: 1.2, stagger: 0.06, ease: "expo.out",
+        scrollTrigger: { trigger: s, start: "top 88%", once: true },
+      });
+    });
+    gsap.from(".legal__toc > *", { y: 30, opacity: 0, duration: 1.2, stagger: 0.1, ease: "expo.out", delay: 0.3 });
   }
 
   /* ---------------------------------------------------------
@@ -989,6 +1037,7 @@
     const menuApi = menu();
     bindLinks(menuApi);
     form();
+    goToHash();
   }
 
   function odooChecks() {
@@ -1011,8 +1060,36 @@
     if (fill) fill.style.transform = "scaleY(1)";
   }
 
+  function goToHash() {
+    const h = window.location.hash;
+    if (!h || h === "#top" || h === "#main") return;
+    const el = $(h);
+    if (!el) return;
+    ScrollTrigger.refresh();
+    if (smoother) smoother.scrollTo(el, false, el.dataset.scrollPos || "top top");
+    else el.scrollIntoView();
+  }
+
+  function initSubpage() {
+    const mm = gsap.matchMedia();
+    legal(mm);
+    reveals();
+    footerAnim();
+    nav();
+    const menuApi = menu();
+    bindLinks(menuApi);
+    cursor();
+    magnetic();
+    html.classList.add("is-ready");
+    gsap.from(".nav__pill", { y: -90, opacity: 0, duration: 1.4, ease: "expo.out", delay: 0.1 });
+    if (smoother) smoother.paused(false);
+    ScrollTrigger.refresh();
+    goToHash();
+  }
+
   function init() {
     if (reduce) { initReduced(); return; }
+    if (page !== "home") { initSubpage(); return; }
 
     const circuit = buildCircuit();
     buildGeoDots();
@@ -1029,6 +1106,7 @@
     solutions();
     odoo(mm);
     tail();
+    footerAnim();
     reveals();
     nav();
 
@@ -1041,13 +1119,22 @@
     const hero = heroIntro(chars, circuit);
     gsap.set(".nav__pill", { y: -90, opacity: 0 });
 
-    runLoader(() => {
+    const start = () => {
       hero.play();
       gsap.to(".nav__pill", { y: 0, opacity: 1, duration: 1.4, ease: "expo.out", delay: 0.35 });
       html.classList.add("is-ready");
       if (smoother) smoother.paused(false);
       ScrollTrigger.refresh();
-    });
+      goToHash();
+    };
+
+    if (introSeen || window.location.hash) {
+      const l = $("#loader");
+      if (l) gsap.to(l, { opacity: 0, duration: 0.5, ease: "power2.out", onComplete: () => l.remove() });
+      start();
+    } else {
+      runLoader(start);
+    }
   }
 
   let started = false;
