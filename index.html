@@ -42,6 +42,7 @@
     <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14.5 8H16V4.5h-2.3A3.7 3.7 0 0 0 10 8.2V10.5H8V14h2v7h3.5v-7h2.3l.5-3.5h-2.8V8.6c0-.3.3-.6.6-.6h.4Z"/></symbol>
     <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7v.01"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c.7 5.3 4.7 9.3 10 10-5.3.7-9.3 4.7-10 10-.7-5.3-4.7-9.3-10-10 5.3-.7 9.3-4.7 10-10Z"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></symbol>
   </svg>
@@ -51,9 +52,9 @@
     <div class="loader__grid"></div>
     <div class="loader__log mono">
       <p><span class="t-dim">~/avatar</span> <span class="t-lime">$</span> <span data-loader-line>npm run build --produccion</span></p>
-      <p data-loader-line>› compilando módulos: erp · crm · gis · qa</p>
-      <p data-loader-line>› integrando procesos de negocio</p>
-      <p data-loader-line class="t-lime">✓ listo para crecer</p>
+      <p><span class="t-dim">›</span> <span data-loader-line>compilando módulos: erp · crm · gis · qa</span></p>
+      <p><span class="t-dim">›</span> <span data-loader-line>integrando procesos de negocio</span></p>
+      <p class="t-lime"><svg class="i"><use href="#i-check"/></svg> <span data-loader-line>listo para crecer</span></p>
     </div>
     <div class="loader__brand">
       <span class="loader__br">&lt;</span><span class="loader__word">avatar</span><span class="loader__br">&gt;</span>
@@ -166,25 +167,25 @@
                   <div class="editor__body">
                     <aside class="editor__tree mono" aria-hidden="true">
                       <p class="t-dim">EXPLORER</p>
-                      <p>▾ avatar</p>
-                      <p class="in">▸ consultoria</p>
-                      <p class="in">▸ desarrollo</p>
-                      <p class="in">▾ soluciones</p>
+                      <p class="tw open">avatar</p>
+                      <p class="in tw">consultoria</p>
+                      <p class="in tw">desarrollo</p>
+                      <p class="in tw open">soluciones</p>
                       <p class="in2 t-lime">odoo.erp.ts</p>
                       <p class="in2">oracle.erp.ts</p>
                       <p class="in2">siebel.crm.ts</p>
                       <p class="in2">gis.map.ts</p>
                       <p class="in2">bi.tableros.ts</p>
-                      <p class="in">▸ testing-qa</p>
-                      <p class="in">▸ staffing-it</p>
+                      <p class="in tw">testing-qa</p>
+                      <p class="in tw">staffing-it</p>
                     </aside>
-                    <pre class="editor__code mono" aria-label="Ejemplo de código"><code id="code"><span class="ln"><span class="k">import</span> { <span class="v">Avatar</span> } <span class="k">from</span> <span class="s">"@avatar/core"</span>;</span><span class="ln"><span class="k">import</span> { <span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span> } <span class="k">from</span> <span class="s">"@avatar/soluciones"</span>;</span><span class="ln"> </span><span class="ln"><span class="c">// software a medida para tu negocio</span></span><span class="ln"><span class="k">const</span> <span class="v">proyecto</span> = <span class="k">await</span> <span class="v">Avatar</span>.<span class="f">crear</span>({</span><span class="ln">  <span class="p">cliente</span>: <span class="s">"tu-empresa"</span>,</span><span class="ln">  <span class="p">soluciones</span>: [<span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span>],</span><span class="ln">  <span class="p">servicios</span>: [<span class="s">"consultoria"</span>, <span class="s">"qa"</span>, <span class="s">"staffing"</span>],</span><span class="ln">  <span class="p">escalable</span>: <span class="n">true</span>,</span><span class="ln">});</span><span class="ln"> </span><span class="ln"><span class="v">proyecto</span>.<span class="f">optimizarProcesos</span>();</span><span class="ln"><span class="v">proyecto</span>.<span class="f">crecer</span>(); <span class="c">// → futuro digital</span></span></code></pre>
+                    <pre class="editor__code mono" aria-label="Ejemplo de código"><code id="code"><span class="ln"><span class="k">import</span> { <span class="v">Avatar</span> } <span class="k">from</span> <span class="s">"@avatar/core"</span>;</span><span class="ln"><span class="k">import</span> { <span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span> } <span class="k">from</span> <span class="s">"@avatar/soluciones"</span>;</span><span class="ln"> </span><span class="ln"><span class="c">// software a medida para tu negocio</span></span><span class="ln"><span class="k">const</span> <span class="v">proyecto</span> = <span class="k">await</span> <span class="v">Avatar</span>.<span class="f">crear</span>({</span><span class="ln">  <span class="p">cliente</span>: <span class="s">"tu-empresa"</span>,</span><span class="ln">  <span class="p">soluciones</span>: [<span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span>],</span><span class="ln">  <span class="p">servicios</span>: [<span class="s">"consultoria"</span>, <span class="s">"qa"</span>, <span class="s">"staffing"</span>],</span><span class="ln">  <span class="p">escalable</span>: <span class="n">true</span>,</span><span class="ln">});</span><span class="ln"> </span><span class="ln"><span class="v">proyecto</span>.<span class="f">optimizarProcesos</span>();</span><span class="ln"><span class="v">proyecto</span>.<span class="f">crecer</span>(); <span class="c">// hacia el futuro digital</span></span></code></pre>
                   </div>
                   <div class="editor__term mono">
-                    <p><span class="t-lime">➜</span> <span class="t-dim">~/avatar</span> <span id="term-cmd"></span><span class="caret" id="term-caret"></span></p>
-                    <p class="term-out"><span class="t-lime">✓</span> consultoría · procesos analizados</p>
-                    <p class="term-out"><span class="t-lime">✓</span> tests QA superados</p>
-                    <p class="term-out"><span class="t-lime">✓</span> deploy en producción</p>
+                    <p><span class="t-dim">~/avatar</span> <span class="t-lime">$</span> <span id="term-cmd"></span><span class="caret" id="term-caret"></span></p>
+                    <p class="term-out"><svg class="i t-lime"><use href="#i-check"/></svg> consultoría · procesos analizados</p>
+                    <p class="term-out"><svg class="i t-lime"><use href="#i-check"/></svg> tests QA superados</p>
+                    <p class="term-out"><svg class="i t-lime"><use href="#i-check"/></svg> deploy en producción</p>
                   </div>
                 </div>
               </div>
@@ -209,12 +210,12 @@
           </div>
           <div class="marquee" data-dir="1">
             <div class="marquee__inner">
-              <span>HTML5</span><i>✦</i><span class="o">Java</span><i>✦</i><span>Android</span><i>✦</i><span class="o">C++</span><i>✦</i><span>Apache</span><i>✦</i><span class="o">Python</span><i>✦</i><span>AJAX</span><i>✦</i><span class="o">QGIS</span><i>✦</i><span>PHP</span><i>✦</i>
+              <span>HTML5</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">Java</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>Android</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">C++</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>Apache</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">Python</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>AJAX</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">QGIS</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>PHP</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i>
             </div>
           </div>
           <div class="marquee" data-dir="-1">
             <div class="marquee__inner">
-              <span class="o">Oracle</span><i>✦</i><span>Linux</span><i>✦</i><span class="o">Angular</span><i>✦</i><span>MySQL</span><i>✦</i><span class="o">JSON</span><i>✦</i><span>QField</span><i>✦</i><span class="o">MariaDB</span><i>✦</i><span>jQuery</span><i>✦</i><span class="o">iOS</span><i>✦</i>
+              <span class="o">Oracle</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>Linux</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">Angular</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>MySQL</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">JSON</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>QField</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">MariaDB</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span>jQuery</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i><span class="o">iOS</span><i><svg class="i i--fill"><use href="#i-spark"/></svg></i>
             </div>
           </div>
         </section>
@@ -448,7 +449,7 @@
               <a href="#contacto" class="tile tile--fe" data-scroll-link data-motivo="Otros" data-cursor="Consultar">
                 <div class="tile__core">
                   <div class="tile__head"><span class="tag mono">PY</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
-                  <div class="vis-doc" aria-hidden="true"><div class="doc"><i></i><i></i><i class="s"></i><i></i><i class="s"></i><span class="stamp mono">✓ emitida</span></div></div>
+                  <div class="vis-doc" aria-hidden="true"><div class="doc"><i></i><i></i><i class="s"></i><i></i><i class="s"></i><span class="stamp mono"><svg class="i"><use href="#i-check"/></svg> emitida</span></div></div>
                   <div class="tile__body">
                     <h3 class="tile__title">Factura electrónica en Paraguay</h3>
                     <p>Digitalizá tu gestión administrativa y ganá eficiencia con la factura electrónica.</p>

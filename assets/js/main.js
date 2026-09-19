@@ -219,7 +219,7 @@
       },
     });
 
-    const cmd = "avatar deploy --entorno=produccion";
+    const cmd = "avatar deploy --prod";
     const cmdEl = $("#term-cmd");
     const c2 = { i: 0 };
     tl.to(c2, {
@@ -240,9 +240,11 @@
     const num = $("#loader-num");
     const lines = $$("[data-loader-line]");
     const texts = lines.map((l) => l.textContent);
+    const rows = lines.map((l) => l.closest("p"));
     const word = $(".loader__word");
     const brs = $$(".loader__br");
 
+    gsap.set(rows.slice(1), { opacity: 0 });
     gsap.set(lines, { opacity: 0 });
     gsap.set(word, { clipPath: "inset(0 50% 0 50%)" });
     const half = word.offsetWidth / 2;
@@ -262,7 +264,7 @@
       .to(word, { clipPath: "inset(0 0% 0 0%)", duration: 1.3, ease: "expo.inOut" }, 0.35);
 
     lines.forEach((l, i) => {
-      tl.set(l, { opacity: 1 }, 0.1 + i * 0.42)
+      tl.set([l, rows[i]], { opacity: 1 }, 0.1 + i * 0.42)
         .to(l, { duration: 0.5, scrambleText: { text: texts[i], chars: "01<>/{}#$", speed: 0.9 } }, 0.1 + i * 0.42);
     });
 
@@ -477,7 +479,7 @@
       const track = $("#services-track");
       const bar = $("#svc-bar");
       const count = $("#svc-count");
-      const dist = () => track.scrollWidth - window.innerWidth;
+      const dist = () => track.scrollWidth - document.documentElement.clientWidth;
       const tween = gsap.to(track, {
         x: () => -dist(),
         ease: "none",
@@ -626,8 +628,8 @@
     // Banner que se desplaza horizontalmente con el scroll
     const line = $("#ask-line");
     gsap.fromTo(line,
-      { x: () => window.innerWidth * 0.25 },
-      { x: () => -(line.scrollWidth - window.innerWidth * 0.75), ease: "none",
+      { x: () => document.documentElement.clientWidth * 0.25 },
+      { x: () => -(line.scrollWidth - document.documentElement.clientWidth * 0.75), ease: "none",
         scrollTrigger: { trigger: ".ask", start: "top bottom", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true } });
   }
 
@@ -643,7 +645,7 @@
         gsap.to(batch, { y: 0, opacity: 1, duration: 1.3, stagger: 0.1, ease: "expo.out" });
         batch.forEach((p, i) => {
           const log = $(".pain__log", p);
-          gsap.fromTo(log, { opacity: 0 }, { opacity: 1, duration: 0.1, delay: 0.25 + i * 0.1, repeat: 5, yoyo: true, ease: "steps(1)" });
+          gsap.fromTo(log, { opacity: 0 }, { opacity: 1, duration: 0.1, delay: 0.25 + i * 0.1, repeat: 4, yoyo: true, ease: "steps(1)" });
         });
       },
     });
@@ -949,7 +951,7 @@
       ].join("\n");
       window.location.href = `mailto:info@avatarinformatica.com.ar?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       status.className = "form__status mono ok";
-      status.textContent = "✓ Abriendo tu correo para enviar la consulta…";
+      status.textContent = "Abriendo tu correo para enviar la consulta…";
     });
     $$("input, select, textarea", f).forEach((inp) => {
       inp.addEventListener("input", () => (inp.closest(".field") || inp.closest(".check")).classList.remove("is-invalid"));
@@ -981,7 +983,7 @@
     html.classList.add("is-ready");
     $$(".term-out").forEach((o) => (o.style.opacity = 1));
     const cmd = $("#term-cmd");
-    if (cmd) cmd.textContent = "avatar deploy --entorno=produccion";
+    if (cmd) cmd.textContent = "avatar deploy --prod";
     odooChecks();
     nav();
     const menuApi = menu();
