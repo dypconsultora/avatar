@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Avatar Informática — Software empresarial &amp; Servicios IT</title>
+  <meta name="description" content="Desarrollo de software a medida y soluciones IT para empresas: Odoo ERP, Oracle ERP, Siebel CRM, BI, GIS, factura electrónica, staffing IT, consultoría y testing QA. Argentina y Paraguay.">
+  <meta name="theme-color" content="#060705">
+  <meta property="og:title" content="Avatar Informática — Software empresarial & Servicios IT">
+  <meta property="og:description" content="Desarrollo de software y soluciones IT para el futuro digital de tu negocio.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://avatarinformatica.com/">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    (function () {
+      var d = document.documentElement, t = null;
+      d.classList.add('js');
+      try { t = localStorage.getItem('avatar-theme'); } catch (e) {}
+      d.dataset.theme = t === 'light' ? 'light' : 'dark';
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- ============ SVG SPRITE (iconos de trazo fino) ============ -->
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-d" viewBox="0 0 24 24"><path d="M12 4v16M6 14l6 6 6-6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4 2.8 19.5h18.4L12 4ZM12 10v4.5M12 17.2v.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7.5 8 5.5 8-5.5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3l1.8 4.6-2.2 1.4a10.5 10.5 0 0 0 5.9 5.9l1.4-2.2 4.6 1.8v3a2 2 0 0 1-2.1 2A15.5 15.5 0 0 1 3.5 6.1 2 2 0 0 1 5.5 4Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5Z"/><path d="M9 8.3c0 3.2 2.6 6.2 6.1 6.6l1.1-1.4-2-1-.9.8a4.6 4.6 0 0 1-2.4-2.4l.8-.9-1-2L9 8.3Z"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V16M8 7.8v.01M12 16v-3.3a2 2 0 0 1 4 0V16M12 10.5V16"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14.5 8H16V4.5h-2.3A3.7 3.7 0 0 0 10 8.2V10.5H8V14h2v7h3.5v-7h2.3l.5-3.5h-2.8V8.6c0-.3.3-.6.6-.6h.4Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7v.01"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1Z"/></symbol>
+  </svg>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__grid"></div>
+    <div class="loader__log mono">
+      <p><span class="t-dim">~/avatar</span> <span class="t-lime">$</span> <span data-loader-line>npm run build --produccion</span></p>
+      <p data-loader-line>› compilando módulos: erp · crm · gis · qa</p>
+      <p data-loader-line>› integrando procesos de negocio</p>
+      <p data-loader-line class="t-lime">✓ listo para crecer</p>
+    </div>
+    <div class="loader__brand">
+      <span class="loader__br">&lt;</span><span class="loader__word">avatar</span><span class="loader__br">&gt;</span>
+    </div>
+    <div class="loader__count mono"><span id="loader-num">000</span><span class="t-dim">%</span></div>
+    <div class="loader__bar"><span id="loader-bar"></span></div>
+  </div>
+
+  <!-- ============ CURSOR + GRAIN ============ -->
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV · PÍLDORA DE VIDRIO ============ -->
+  <header class="nav" id="nav">
+    <nav class="nav__pill" aria-label="Navegación principal">
+      <a href="#top" class="nav__logo" data-scroll-link aria-label="Avatar Informática — inicio">
+        <span class="br">&lt;</span><span class="nav__logo-word">avatar</span><span class="br">&gt;</span>
+      </a>
+      <div class="nav__links">
+        <span class="nav__indicator" aria-hidden="true"></span>
+        <a href="#equipo" data-scroll-link data-nav="equipo">Equipo</a>
+        <a href="#servicios" data-scroll-link data-nav="servicios">Servicios</a>
+        <a href="#soluciones" data-scroll-link data-nav="soluciones">Soluciones</a>
+        <a href="#odoo" data-scroll-link data-nav="odoo">Odoo ERP</a>
+        <a href="#blog" data-scroll-link data-nav="blog">Blog</a>
+      </div>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Activar modo día" title="Modo día / noche">
+        <svg class="i i--moon"><use href="#i-moon"/></svg>
+        <svg class="i i--sun"><use href="#i-sun"/></svg>
+      </button>
+      <a href="#contacto" class="btn btn--primary btn--sm nav__cta magnetic" data-scroll-link>
+        <span class="btn__label">Contacto</span>
+        <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+      </a>
+      <button class="nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+      </button>
+      <span class="nav__progress" aria-hidden="true"><span id="nav-progress"></span></span>
+    </nav>
+  </header>
+
+  <!-- ============ MENÚ MOBILE ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__inner">
+      <p class="eyebrow mono">Menú</p>
+      <ul class="menu__list">
+        <li><a href="#equipo" data-scroll-link><span class="mono">01</span><span class="menu__label">Equipo</span></a></li>
+        <li><a href="#servicios" data-scroll-link><span class="mono">02</span><span class="menu__label">Servicios</span></a></li>
+        <li><a href="#soluciones" data-scroll-link><span class="mono">03</span><span class="menu__label">Soluciones</span></a></li>
+        <li><a href="#odoo" data-scroll-link><span class="mono">04</span><span class="menu__label">Odoo ERP</span></a></li>
+        <li><a href="#blog" data-scroll-link><span class="mono">05</span><span class="menu__label">Blog</span></a></li>
+        <li><a href="#contacto" data-scroll-link><span class="mono">06</span><span class="menu__label">Contacto</span></a></li>
+      </ul>
+      <div class="menu__foot">
+        <a href="mailto:info@avatarinformatica.com.ar">info@avatarinformatica.com.ar</a>
+        <a href="tel:+595983111901">(+595) 983 111-901</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main id="main">
+
+        <!-- ================= HERO ================= -->
+        <section class="hero" id="top">
+          <div class="hero__bg" aria-hidden="true">
+            <div class="hero__grid"></div>
+            <svg class="hero__circuit" id="circuit" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice"></svg>
+            <div class="hero__glow"></div>
+            <div class="hero__glow hero__glow--2"></div>
+          </div>
+
+          <div class="wrap hero__inner">
+            <div class="hero__eyebrow">
+              <span class="pill mono"><span class="pill__dot"></span><span data-hero-scramble>Software empresarial &amp; Servicios IT</span></span>
+              <span class="hero__loc mono">AR <span class="t-dim">/</span> PY</span>
+            </div>
+
+            <h1 class="hero__title" id="hero-title">
+              Desarrollo de software y soluciones IT para el <em>futuro digital</em> de tu negocio
+            </h1>
+
+            <div class="hero__row">
+              <p class="hero__sub">Somos expertos en el diseño y desarrollo de software a medida que potencia el crecimiento de pequeñas, medianas y grandes empresas.</p>
+              <div class="hero__ctas">
+                <a href="#odoo" class="btn btn--primary magnetic" data-scroll-link>
+                  <span class="btn__label">Explorá soluciones a medida</span>
+                  <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+                </a>
+                <a href="#contacto" class="btn btn--ghost magnetic" data-scroll-link>
+                  <span class="btn__label">Hablemos</span>
+                  <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor de código -->
+          <div class="hero__stage wrap">
+            <div class="editor-tilt" id="editor-tilt">
+              <div class="bezel editor" id="editor">
+                <div class="bezel__core editor__core">
+                  <div class="editor__bar">
+                    <span class="editor__dots"><i></i><i></i><i></i></span>
+                    <span class="editor__tab is-active mono">avatar.config.ts</span>
+                    <span class="editor__tab mono">erp.module.ts</span>
+                    <span class="editor__branch mono"><i></i>main</span>
+                  </div>
+                  <div class="editor__body">
+                    <aside class="editor__tree mono" aria-hidden="true">
+                      <p class="t-dim">EXPLORER</p>
+                      <p>▾ avatar</p>
+                      <p class="in">▸ consultoria</p>
+                      <p class="in">▸ desarrollo</p>
+                      <p class="in">▾ soluciones</p>
+                      <p class="in2 t-lime">odoo.erp.ts</p>
+                      <p class="in2">oracle.erp.ts</p>
+                      <p class="in2">siebel.crm.ts</p>
+                      <p class="in2">gis.map.ts</p>
+                      <p class="in2">bi.tableros.ts</p>
+                      <p class="in">▸ testing-qa</p>
+                      <p class="in">▸ staffing-it</p>
+                    </aside>
+                    <pre class="editor__code mono" aria-label="Ejemplo de código"><code id="code"><span class="ln"><span class="k">import</span> { <span class="v">Avatar</span> } <span class="k">from</span> <span class="s">"@avatar/core"</span>;</span><span class="ln"><span class="k">import</span> { <span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span> } <span class="k">from</span> <span class="s">"@avatar/soluciones"</span>;</span><span class="ln"> </span><span class="ln"><span class="c">// software a medida para tu negocio</span></span><span class="ln"><span class="k">const</span> <span class="v">proyecto</span> = <span class="k">await</span> <span class="v">Avatar</span>.<span class="f">crear</span>({</span><span class="ln">  <span class="p">cliente</span>: <span class="s">"tu-empresa"</span>,</span><span class="ln">  <span class="p">soluciones</span>: [<span class="v">Odoo</span>, <span class="v">Oracle</span>, <span class="v">Siebel</span>],</span><span class="ln">  <span class="p">servicios</span>: [<span class="s">"consultoria"</span>, <span class="s">"qa"</span>, <span class="s">"staffing"</span>],</span><span class="ln">  <span class="p">escalable</span>: <span class="n">true</span>,</span><span class="ln">});</span><span class="ln"> </span><span class="ln"><span class="v">proyecto</span>.<span class="f">optimizarProcesos</span>();</span><span class="ln"><span class="v">proyecto</span>.<span class="f">crecer</span>(); <span class="c">// → futuro digital</span></span></code></pre>
+                  </div>
+                  <div class="editor__term mono">
+                    <p><span class="t-lime">➜</span> <span class="t-dim">~/avatar</span> <span id="term-cmd"></span><span class="caret" id="term-caret"></span></p>
+                    <p class="term-out"><span class="t-lime">✓</span> consultoría · procesos analizados</p>
+                    <p class="term-out"><span class="t-lime">✓</span> tests QA superados</p>
+                    <p class="term-out"><span class="t-lime">✓</span> deploy en producción</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <dl class="stats">
+              <div class="stat"><dt class="mono">Países</dt><dd><span data-count="2">0</span></dd><p>Argentina y Paraguay</p></div>
+              <div class="stat"><dt class="mono">Servicios</dt><dd><span data-count="4">0</span></dd><p>Software · Staffing · Consultoría · QA</p></div>
+              <div class="stat"><dt class="mono">Soluciones</dt><dd><span data-count="8">0</span></dd><p>ERP · CRM · BI · GIS y más</p></div>
+              <div class="stat"><dt class="mono">Tecnologías</dt><dd><span data-count="18">0</span>+</dd><p>En nuestro stack diario</p></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- ================= STACK / MARQUEE ================= -->
+        <section class="stack" id="stack" aria-label="Stack tecnológico">
+          <div class="wrap stack__head">
+            <span class="eyebrow mono" data-scramble>Stack tecnológico</span>
+            <p class="stack__platforms">Implementamos y desarrollamos sobre <b>Odoo</b>, <b>Oracle</b>, <b>Siebel</b> y <b>Humand</b></p>
+          </div>
+          <div class="marquee" data-dir="1">
+            <div class="marquee__inner">
+              <span>HTML5</span><i>✦</i><span class="o">Java</span><i>✦</i><span>Android</span><i>✦</i><span class="o">C++</span><i>✦</i><span>Apache</span><i>✦</i><span class="o">Python</span><i>✦</i><span>AJAX</span><i>✦</i><span class="o">QGIS</span><i>✦</i><span>PHP</span><i>✦</i>
+            </div>
+          </div>
+          <div class="marquee" data-dir="-1">
+            <div class="marquee__inner">
+              <span class="o">Oracle</span><i>✦</i><span>Linux</span><i>✦</i><span class="o">Angular</span><i>✦</i><span>MySQL</span><i>✦</i><span class="o">JSON</span><i>✦</i><span>QField</span><i>✦</i><span class="o">MariaDB</span><i>✦</i><span>jQuery</span><i>✦</i><span class="o">iOS</span><i>✦</i>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= EQUIPO ================= -->
+        <section class="team section" id="equipo">
+          <div class="wrap">
+            <div class="team__intro">
+              <span class="eyebrow mono" data-scramble>[01] — Nuestra empresa</span>
+              <p class="manifesto" id="manifesto">Avatar Informática S.R.L. es una empresa radicada en Paraguay dedicada al desarrollo tecnológico. Está conformada por un equipo de profesionales expertos en el área de tecnologías de la información que integran y complementan sus conocimientos y especializaciones para la generación de proyectos de <em>marcada calidad.</em></p>
+              <div class="team__meta" data-reveal>
+                <p>Conoce nuestra compañía y al equipo de expertos en el desarrollo de software y soluciones IT para tu empresa.</p>
+                <ul class="offices mono">
+                  <li><span class="t-lime">AR</span> Santa Fe — Buenos Aires</li>
+                  <li><span class="t-lime">PY</span> Asunción</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="cards-stack" id="cards-stack">
+              <article class="scard">
+                <div class="bezel scard__shell">
+                  <div class="bezel__core scard__core">
+                    <div class="scard__txt">
+                      <span class="scard__num mono">01 / 03</span>
+                      <h3 class="scard__title">Misión</h3>
+                      <p>Nuestro objetivo es crear soluciones informáticas escalables y a medida de las necesidades de cada empresa y negocio para optimizar procesos y generar sólidas oportunidades de crecimiento para nuestros clientes.</p>
+                    </div>
+                    <div class="scard__art art-target" aria-hidden="true">
+                      <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="68"/><circle cx="100" cy="100" r="44"/><circle class="fill" cx="100" cy="100" r="16"/><path d="M100 0v40M100 160v40M0 100h40M160 100h40"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="scard">
+                <div class="bezel scard__shell">
+                  <div class="bezel__core scard__core">
+                    <div class="scard__txt">
+                      <span class="scard__num mono">02 / 03</span>
+                      <h3 class="scard__title">Visión</h3>
+                      <p>Nos proyectamos como una empresa transparente y confiable, enfocada en crear soluciones tecnológicas que aporten beneficios e innovación a nuestros clientes y generen un impacto positivo a nivel global.</p>
+                    </div>
+                    <div class="scard__art art-globe" aria-hidden="true">
+                      <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="90"/><ellipse cx="100" cy="100" rx="36" ry="90"/><ellipse cx="100" cy="100" rx="68" ry="90"/><path d="M10 100h180M22 55h156M22 145h156"/><circle class="fill orbit" cx="190" cy="100" r="5"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="scard">
+                <div class="bezel scard__shell">
+                  <div class="bezel__core scard__core">
+                    <div class="scard__txt">
+                      <span class="scard__num mono">03 / 03</span>
+                      <h3 class="scard__title">Políticas de <em>Calidad</em></h3>
+                      <p>Nuestro compromiso se traduce en una meticulosa organización del proceso de trabajo para crear relaciones sólidas, duraderas y satisfactorias con nuestros clientes. Partiendo de nuestro servicio de consultoría identificamos las necesidades que se presentan para desarrollar las herramientas digitales adecuadas para cada empresa.</p>
+                    </div>
+                    <div class="scard__art art-seal" aria-hidden="true">
+                      <svg viewBox="0 0 200 200">
+                        <defs><path id="seal-path" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs>
+                        <g class="seal-rot"><text><textPath href="#seal-path" textLength="484" lengthAdjust="spacing">CALIDAD · COMPROMISO · CONSULTORÍA · MEJORA CONTINUA · </textPath></text></g>
+                        <circle cx="100" cy="100" r="56"/>
+                        <text class="seal-iso" x="100" y="96" text-anchor="middle">ISO</text>
+                        <text class="seal-num" x="100" y="122" text-anchor="middle">9001</text>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= SERVICIOS (scroll horizontal) ================= -->
+        <section class="services" id="servicios">
+          <div class="services__pin">
+            <div class="services__track" id="services-track">
+              <div class="services__intro">
+                <span class="eyebrow mono" data-scramble>[02] — Servicios</span>
+                <h2 class="h2" data-split>Servicios informáticos <em>profesionales</em> para empresas</h2>
+                <p class="lead" data-reveal>En Avatar Informática ofrecemos servicios informáticos integrales desarrollados especialmente para empresas que buscan innovar, optimizar sus procesos y crecer sostenidamente.</p>
+                <p class="services__hint mono" data-reveal><svg class="i"><use href="#i-arrow-r"/></svg> Desplazá para recorrer</p>
+              </div>
+
+              <article class="svc bezel">
+                <div class="bezel__core svc__core">
+                  <div class="svc__top"><span class="svc__num">01</span><span class="mono t-dim">/fabrica-de-software</span></div>
+                  <div class="svc__visual vis-code" aria-hidden="true">
+                    <div class="vis-code__tabs mono"><span class="on">gestion.ts</span><span>automatizacion.ts</span><span>integraciones.ts</span></div>
+                    <div class="vis-code__lines">
+                      <i style="--w:38%;--o:0"></i><i style="--w:64%;--o:1"></i><i style="--w:52%;--o:1" class="lime"></i><i style="--w:72%;--o:2"></i><i style="--w:44%;--o:2"></i><i style="--w:58%;--o:1" class="lime"></i><i style="--w:30%;--o:0"></i>
+                    </div>
+                  </div>
+                  <h3 class="svc__title">Fábrica de Software</h3>
+                  <p class="svc__text">Desarrollamos aplicaciones empresariales a medida, adaptadas a tus necesidades. Desde sistemas de gestión hasta herramientas de automatización e integraciones para optimizar procesos que potencien el crecimiento de tu empresa.</p>
+                  <a href="#contacto" class="link-arrow" data-scroll-link data-motivo="Consultoría en desarrollo de software a medida">Saber más <svg class="i"><use href="#i-arrow-ur"/></svg></a>
+                </div>
+              </article>
+
+              <article class="svc bezel">
+                <div class="bezel__core svc__core">
+                  <div class="svc__top"><span class="svc__num">02</span><span class="mono t-dim">/staffing-it</span></div>
+                  <div class="svc__visual vis-team" aria-hidden="true">
+                    <div class="vis-team__grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    <div class="vis-team__roles mono"><span>desarrollo</span><span>soporte</span><span>gestión IT</span></div>
+                  </div>
+                  <h3 class="svc__title">Staffing IT</h3>
+                  <p class="svc__text">Incorpora talento especializado para tu equipo tecnológico sin perder tiempo en procesos largos: profesionales calificados en desarrollo, soporte o gestión IT que se integran con agilidad y flexibilidad a tu proyecto garantizando excelentes resultados.</p>
+                  <a href="#contacto" class="link-arrow" data-scroll-link data-motivo="Consultoría para Staffing IT">Saber más <svg class="i"><use href="#i-arrow-ur"/></svg></a>
+                </div>
+              </article>
+
+              <article class="svc bezel">
+                <div class="bezel__core svc__core">
+                  <div class="svc__top"><span class="svc__num">03</span><span class="mono t-dim">/consultoria-it</span></div>
+                  <div class="svc__visual vis-flow" aria-hidden="true">
+                    <svg viewBox="0 0 360 150">
+                      <path class="flow-line" d="M110 28C140 28 128 75 150 75"/>
+                      <path class="flow-line" d="M110 75H150"/>
+                      <path class="flow-line" d="M110 122C140 122 128 75 150 75"/>
+                      <path class="flow-line" d="M226 75h18"/>
+                      <g class="flow-node"><rect x="2" y="16" width="108" height="24" rx="12"/><text x="56" y="31.5">procesos</text></g>
+                      <g class="flow-node"><rect x="2" y="63" width="108" height="24" rx="12"/><text x="56" y="78.5">infraestructura</text></g>
+                      <g class="flow-node"><rect x="2" y="110" width="108" height="24" rx="12"/><text x="56" y="125.5">flujo de trabajo</text></g>
+                      <g class="flow-node is-hub"><rect x="150" y="61" width="76" height="28" rx="14"/><text x="188" y="78.5">estrategia</text></g>
+                      <g class="flow-node is-out"><rect x="244" y="61" width="114" height="28" rx="14"/><text x="301" y="78.5">implementación</text></g>
+                    </svg>
+                  </div>
+                  <h3 class="svc__title">Consultoría IT</h3>
+                  <p class="svc__text">Analizamos tus procesos tecnológicos, infraestructura y flujo de trabajo para identificar mejoras, definir estrategias y planificar implementaciones que maximicen resultados en la transformación digital de cada empresa.</p>
+                  <a href="#contacto" class="link-arrow" data-scroll-link data-motivo="Consultoría en desarrollo de software a medida">Saber más <svg class="i"><use href="#i-arrow-ur"/></svg></a>
+                </div>
+              </article>
+
+              <article class="svc bezel">
+                <div class="bezel__core svc__core">
+                  <div class="svc__top"><span class="svc__num">04</span><span class="mono t-dim">/testing-qa</span></div>
+                  <div class="svc__visual vis-qa mono" aria-hidden="true">
+                    <div class="vis-qa__row"><span>pruebas funcionales</span><b>PASS</b></div>
+                    <div class="vis-qa__row"><span>rendimiento</span><b>PASS</b></div>
+                    <div class="vis-qa__row"><span>usabilidad</span><b>PASS</b></div>
+                    <div class="vis-qa__row"><span>seguridad</span><b>PASS</b></div>
+                  </div>
+                  <h3 class="svc__title">Testing y QA</h3>
+                  <p class="svc__text">Garantizamos que los productos digitales funcionen como esperas: pruebas funcionales, rendimiento, usabilidad, seguridad. Evita errores costosos y asegura una experiencia satisfactoria para tus usuarios.</p>
+                  <a href="#contacto" class="link-arrow" data-scroll-link data-motivo="Consultoría para Testing y QA">Saber más <svg class="i"><use href="#i-arrow-ur"/></svg></a>
+                </div>
+              </article>
+
+              <div class="services__outro">
+                <p class="mono t-dim">También</p>
+                <ul class="tags">
+                  <li>Consultoría</li><li>Testing y QA</li><li>Implementaciones</li><li>Integraciones</li><li>Soporte técnico</li><li>Staffing IT</li>
+                </ul>
+                <p class="services__outro-txt">Nuestra experiencia en fábrica de software, consultoría IT, staffing especializado y QA nos permite dar soluciones <em>confiables, escalables</em> y alineadas con tus objetivos de negocio.</p>
+              </div>
+            </div>
+            <div class="services__progress wrap" aria-hidden="true"><span class="mono" id="svc-count">01</span><div class="services__bar"><span id="svc-bar"></span></div><span class="mono t-dim">04</span></div>
+          </div>
+        </section>
+
+        <!-- ================= SOLUCIONES (bento) ================= -->
+        <section class="solutions section" id="soluciones">
+          <div class="wrap">
+            <div class="sec-head">
+              <span class="eyebrow mono" data-scramble>[03] — Soluciones</span>
+              <h2 class="h2" data-split>Explora nuestras soluciones y <em>software empresariales</em></h2>
+              <p class="lead" data-reveal>Brindamos soluciones tecnológicas a medida para ayudar a las empresas a crecer, optimizar sus procesos y lograr mejores resultados.</p>
+            </div>
+
+            <div class="bento" id="bento">
+              <a href="#odoo" class="tile tile--odoo" data-scroll-link data-cursor="Ver más">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">ERP</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-odoo" aria-hidden="true">
+                    <span>Ventas</span><span>CRM</span><span>Inventario</span><span>Compras</span><span>Contabilidad</span><span>RR.HH.</span><span>Proyectos</span><span>Fabricación</span>
+                  </div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Odoo ERP</h3>
+                    <p>Organiza, integra y administra la información vital para tu empresa.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--siebel" data-scroll-link data-motivo="Me interesa implementar Siebel" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">CRM</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-orbit" aria-hidden="true"><i class="core"></i><span class="ring r1"><b></b></span><span class="ring r2"><b></b><b></b></span><span class="ring r3"><b></b></span></div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Siebel CRM</h3>
+                    <p>Administra las interacciones con tus clientes y haz crecer tu negocio.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--oracle" data-scroll-link data-motivo="Me interesa implementar Oracle" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">ERP</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-layers" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Oracle ERP</h3>
+                    <p>Explora soluciones de planificación de recursos empresariales.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--bi" data-scroll-link data-motivo="Consultoría para Análisis de Datos" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">DATA</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-bars" aria-hidden="true"><i style="--h:.42"></i><i style="--h:.68"></i><i style="--h:.5"></i><i style="--h:.84"></i><i style="--h:.62"></i><i style="--h:.95"></i><i style="--h:.74"></i></div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">BI, Big Data y tableros de control</h3>
+                    <p>Impulsa tu empresa con una adecuada gestión de datos.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--gis" data-scroll-link data-motivo="Consultoría para GIS" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">GEO</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-gis" aria-hidden="true">
+                    <svg viewBox="0 0 240 110"><path d="M10 80c30-30 60-10 90-30s70-40 130-10"/><path d="M10 95c40-25 70-5 100-22s60-30 120-5"/><path d="M40 60c20-25 55-30 80-18s40 12 60-6"/><path d="M70 45c15-15 40-18 55-8s25 6 35-4"/></svg>
+                    <span class="gis-pin"><i></i></span>
+                  </div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">GIS</h3>
+                    <p>Optimizá tus operaciones con tecnología GIS: integrá mapas, datos y análisis geoespaciales en una sola plataforma.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--fe" data-scroll-link data-motivo="Otros" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">PY</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-doc" aria-hidden="true"><div class="doc"><i></i><i></i><i class="s"></i><i></i><i class="s"></i><span class="stamp mono">✓ emitida</span></div></div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Factura electrónica en Paraguay</h3>
+                    <p>Digitalizá tu gestión administrativa y ganá eficiencia con la factura electrónica.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--auto" data-scroll-link data-motivo="Otros" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">AUTO</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-chain mono" aria-hidden="true"><span>interacción</span><i></i><span>autogestión</span><i></i><span class="on">anticipación</span></div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Automatizaciones y autogestión</h3>
+                    <p>Soluciones para interacción, autogestión y anticipación del servicio.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#contacto" class="tile tile--infra" data-scroll-link data-motivo="Otros" data-cursor="Consultar">
+                <div class="tile__core">
+                  <div class="tile__head"><span class="tag mono">INFRA</span><span class="tile__arrow"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+                  <div class="vis-net" aria-hidden="true">
+                    <svg viewBox="0 0 260 90"><path d="M20 45h50M70 45l40-28M70 45l40 28M110 17h50M110 73h50M160 17l40 28M160 73l40-28M200 45h40"/><circle cx="20" cy="45" r="5"/><circle cx="70" cy="45" r="5"/><circle cx="110" cy="17" r="5"/><circle cx="110" cy="73" r="5"/><circle cx="160" cy="17" r="5"/><circle cx="160" cy="73" r="5"/><circle cx="200" cy="45" r="5"/><circle class="hot" cx="240" cy="45" r="6"/></svg>
+                  </div>
+                  <div class="tile__body">
+                    <h3 class="tile__title">Gestión técnica de infraestructura</h3>
+                    <p>Control, planificación y eficiencia de redes y recursos técnicos.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= PREGUNTA / BANNER ================= -->
+        <section class="ask" aria-label="Sistema de gestión">
+          <a href="#odoo" class="ask__link" data-scroll-link data-cursor="Explorar">
+            <span class="ask__line" id="ask-line">¿Necesitas un sistema de gestión para tu empresa? <em>Explorá soluciones a medida</em> <svg class="i"><use href="#i-arrow-r"/></svg></span>
+          </a>
+        </section>
+
+        <!-- ================= ODOO ================= -->
+        <section class="odoo section" id="odoo">
+          <div class="wrap">
+            <div class="sec-head">
+              <span class="eyebrow mono" data-scramble>[04] — Odoo ERP</span>
+              <h2 class="h2" data-split>Odoo ERP: gestión integrada para hacer <em>crecer tu empresa</em></h2>
+              <p class="lead" data-reveal>Cuando tu empresa crece, te encuentras con…</p>
+            </div>
+
+            <div class="pains">
+              <article class="pain bezel">
+                <div class="bezel__core pain__core">
+                  <p class="pain__log mono"><svg class="i"><use href="#i-warn"/></svg> WARN <span class="t-dim">01</span></p>
+                  <h3>Información dispersa</h3>
+                  <p>Cada área trabaja con herramientas diferentes.</p>
+                </div>
+              </article>
+              <article class="pain bezel">
+                <div class="bezel__core pain__core">
+                  <p class="pain__log mono"><svg class="i"><use href="#i-warn"/></svg> WARN <span class="t-dim">02</span></p>
+                  <h3>Procesos manuales</h3>
+                  <p>Excel y tareas repetitivas consumen tiempo y generan errores.</p>
+                </div>
+              </article>
+              <article class="pain bezel">
+                <div class="bezel__core pain__core">
+                  <p class="pain__log mono"><svg class="i"><use href="#i-warn"/></svg> WARN <span class="t-dim">03</span></p>
+                  <h3>Falta de información</h3>
+                  <p>Los datos llegan tarde o no permiten conocer realmente qué está pasando.</p>
+                </div>
+              </article>
+              <article class="pain bezel">
+                <div class="bezel__core pain__core">
+                  <p class="pain__log mono"><svg class="i"><use href="#i-warn"/></svg> WARN <span class="t-dim">04</span></p>
+                  <h3>Sistemas que no se integran</h3>
+                  <p>La información debe cargarse varias veces.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="scenarios" id="scenarios">
+              <div class="scenarios__head" id="scenarios-head">
+                <h3 class="h3">¿Tu empresa está en alguno de estos <em>escenarios?</em></h3>
+                <p class="scenarios__count mono"><span id="sc-count">0</span><span class="t-dim">/8</span></p>
+                <div class="scenarios__meter"><span id="sc-meter"></span></div>
+              </div>
+              <ul class="checklist" id="checklist">
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>El negocio creció y Excel ya no alcanza.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>No confiás en la información de stock.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>Tenés varios sistemas que no se comunican.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>La información llega tarde a la dirección.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>No conocés con precisión tus costos.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>Hay demasiadas tareas manuales.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>Necesitás integrar sucursales o empresas.</li>
+                <li><span class="box"><svg class="i"><use href="#i-check"/></svg></span>Querés profesionalizar la gestión.</li>
+              </ul>
+            </div>
+
+            <div class="offer bezel" data-reveal>
+              <div class="bezel__core offer__core">
+                <div class="offer__glow" aria-hidden="true"></div>
+                <p class="mono t-dim">Si identificaste alguna de estas situaciones en tu empresa</p>
+                <p class="offer__title">Podemos ayudarte a resolverlas <em>sin inversión inicial</em></p>
+                <a href="#contacto" class="btn btn--primary magnetic" data-scroll-link data-motivo="Me interesa implementar Odoo">
+                  <span class="btn__label">Solicitar consultoría</span>
+                  <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+                </a>
+              </div>
+            </div>
+
+            <div class="statement">
+              <p class="statement__text" id="statement">Odoo es la plataforma. <span class="hl">Avatar</span> es quien transforma tu operación.</p>
+              <div class="statement__cols">
+                <p data-reveal>Odoo permite centralizar la operación y convertir los datos de tu empresa en información útil para decidir, ya que es una plataforma de gestión empresarial modular que permite integrar las principales áreas de una organización y crecer incorporando nuevas funcionalidades según las necesidades del negocio a lo largo del tiempo.</p>
+                <p data-reveal>En Avatar Informática tenemos la responsabilidad de guiar y acompañar ese proceso de transformación empresarial.</p>
+              </div>
+            </div>
+
+            <div class="why" id="why">
+              <div class="why__head" id="why-head">
+                <span class="eyebrow mono" data-scramble>Proceso de trabajo</span>
+                <h3 class="h3">¿Por qué Avatar Informática como <em>proveedor?</em></h3>
+                <p>No somos solamente implementadores de sistemas de gestión, contamos con experiencia en desarrollo de software a medida, integraciones, testing y consultoría IT en importantes empresas de Argentina y Paraguay. Nuestro proceso de trabajo abarca:</p>
+              </div>
+              <div class="steps-wrap">
+              <span class="steps__rail" aria-hidden="true"><span id="steps-fill"></span></span>
+              <ol class="steps" id="steps">
+                <li class="step"><span class="step__dot"></span><span class="step__num mono">01</span><div><h4>Consultoría</h4><p>Analizamos tus procesos antes de definir la solución.</p></div></li>
+                <li class="step"><span class="step__dot"></span><span class="step__num mono">02</span><div><h4>Implementación</h4><p>Configuramos Odoo de acuerdo con las necesidades de tu empresa.</p></div></li>
+                <li class="step"><span class="step__dot"></span><span class="step__num mono">03</span><div><h4>Integración</h4><p>Conectamos Odoo con tus sistemas, plataformas y herramientas actuales.</p></div></li>
+                <li class="step"><span class="step__dot"></span><span class="step__num mono">04</span><div><h4>Desarrollo</h4><p>Creamos soluciones específicas cuando el estándar de Odoo no alcanza.</p></div></li>
+                <li class="step"><span class="step__dot"></span><span class="step__num mono">05</span><div><h4>Soporte</h4><p>Acompañamos a tu equipo antes, durante y después de la implementación.</p></div></li>
+              </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= BLOG ================= -->
+        <section class="blog section" id="blog">
+          <div class="wrap">
+            <div class="blog__head">
+              <div class="sec-head">
+                <span class="eyebrow mono" data-scramble>[05] — Blog</span>
+                <h2 class="h2" data-split>Ideas para tu <em>transformación digital</em></h2>
+              </div>
+              <a href="https://avatarinformatica.com/blog/" class="btn btn--ghost magnetic" target="_blank" rel="noopener">
+                <span class="btn__label">Ver todo el blog</span>
+                <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+              </a>
+            </div>
+            <div class="posts">
+              <a class="post" href="https://avatarinformatica.com/geomarketing-para-el-desarrollo-comercial/" target="_blank" rel="noopener" data-cursor="Leer">
+                <div class="bezel post__shell">
+                  <div class="bezel__core post__core">
+                    <div class="post__cover cover-geo" aria-hidden="true">
+                      <svg viewBox="0 0 400 220"><g class="dots"></g><path class="route" d="M40 170C110 150 120 70 200 90s110-40 160-60"/><circle class="p1" cx="40" cy="170" r="6"/><circle class="p2" cx="360" cy="30" r="6"/></svg>
+                    </div>
+                    <div class="post__meta mono"><span>Seminario</span><span class="t-dim">29 febrero, 2024</span></div>
+                    <h3 class="post__title">Geomarketing aplicado al análisis y planificación comercial</h3>
+                    <p class="post__ex">Si estás buscando comprender qué es el geomarketing y para qué sirve te proponemos ver nuestro seminario, en el que hallarás una explicación completa…</p>
+                    <span class="link-arrow">Leer publicación <svg class="i"><use href="#i-arrow-ur"/></svg></span>
+                  </div>
+                </div>
+              </a>
+              <a class="post" href="https://avatarinformatica.com/que-es-un-crm/" target="_blank" rel="noopener" data-cursor="Leer">
+                <div class="bezel post__shell">
+                  <div class="bezel__core post__core">
+                    <div class="post__cover cover-crm" aria-hidden="true">
+                      <svg viewBox="0 0 400 220"><g class="links"><path d="M200 110 90 60M200 110l110-50M200 110 80 170M200 110l120 60M200 110V30M200 110v90"/></g><circle class="hub" cx="200" cy="110" r="18"/><circle cx="90" cy="60" r="8"/><circle cx="310" cy="60" r="8"/><circle cx="80" cy="170" r="8"/><circle cx="320" cy="170" r="8"/><circle cx="200" cy="30" r="6"/><circle cx="200" cy="200" r="6"/></svg>
+                    </div>
+                    <div class="post__meta mono"><span>Artículo</span><span class="t-dim">12 abril, 2022</span></div>
+                    <h3 class="post__title">¿Qué es un CRM y por qué es tan importante para tu empresa?</h3>
+                    <p class="post__ex">Si estás buscando comprender qué es un CRM te proponemos leer el siguiente artículo en el que hallarás clasificaciones, áreas de aplicación y las recomendaciones…</p>
+                    <span class="link-arrow">Leer publicación <svg class="i"><use href="#i-arrow-ur"/></svg></span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= CTA FINAL ================= -->
+        <section class="finale" aria-label="Consultoría sin cargo">
+          <div class="finale__glow" aria-hidden="true"></div>
+          <div class="wrap finale__inner">
+            <p class="finale__title" id="finale-title">El futuro de tu empresa está en <em>tus manos.</em></p>
+            <p class="finale__sub" data-reveal>Solicita una consultoría sin cargo para explorar qué opciones tienes para tu empresa.</p>
+            <a href="#contacto" class="btn btn--primary btn--lg magnetic" data-scroll-link data-reveal>
+              <span class="btn__label">Solicitar consultoría sin cargo</span>
+              <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+            </a>
+          </div>
+        </section>
+
+        <!-- ================= CONTACTO ================= -->
+        <section class="contact section" id="contacto">
+          <div class="wrap contact__grid">
+            <div class="contact__info">
+              <span class="eyebrow mono" data-scramble>[06] — Contacto</span>
+              <h2 class="h2" data-split>Puedes escribirnos si necesitas <em>asesoramiento técnico.</em></h2>
+              <p class="lead" data-reveal>Ponte en contacto con nosotros detallando el motivo de tu consulta para que podamos asesorarte y ayudarte a potenciar el crecimiento de tu empresa o negocio. También puedes escribirnos por WhatsApp.</p>
+
+              <ul class="clist" data-reveal-group>
+                <li><span class="clist__ic"><svg class="i"><use href="#i-pin"/></svg></span><div><span class="mono t-dim">Oficinas</span><p>Santa Fe – Buenos Aires, Argentina<br>Asunción, Paraguay</p></div></li>
+                <li><a href="tel:+595983111901"><span class="clist__ic"><svg class="i"><use href="#i-phone"/></svg></span><div><span class="mono t-dim">Teléfono</span><p>(+595) 983 111-901</p></div></a></li>
+                <li><a href="mailto:info@avatarinformatica.com.ar"><span class="clist__ic"><svg class="i"><use href="#i-mail"/></svg></span><div><span class="mono t-dim">E-mail</span><p>info@avatarinformatica.com.ar</p></div></a></li>
+                <li><a href="https://wa.me/595983111901" target="_blank" rel="noopener"><span class="clist__ic"><svg class="i"><use href="#i-wa"/></svg></span><div><span class="mono t-dim">WhatsApp</span><p>Escribinos ahora</p></div></a></li>
+              </ul>
+
+              <div class="socials" data-reveal>
+                <a href="https://www.linkedin.com/company/avatarinformatica/" target="_blank" rel="noopener" aria-label="LinkedIn" class="magnetic"><svg class="i"><use href="#i-in"/></svg></a>
+                <a href="https://www.facebook.com/avatar.informatica.ok" target="_blank" rel="noopener" aria-label="Facebook" class="magnetic"><svg class="i"><use href="#i-fb"/></svg></a>
+                <a href="https://www.instagram.com/avatar_informatica_ok/" target="_blank" rel="noopener" aria-label="Instagram" class="magnetic"><svg class="i"><use href="#i-ig"/></svg></a>
+              </div>
+            </div>
+
+            <div class="bezel form-shell" data-reveal>
+              <form class="bezel__core form" id="contact-form" novalidate>
+                <div class="form__head mono"><span><i class="live"></i> nueva_consulta.json</span><span class="t-dim">* obligatorio</span></div>
+                <div class="form__grid">
+                  <label class="field"><span class="field__lbl mono">Nombre y apellido *</span><input name="nombre" type="text" autocomplete="name" required></label>
+                  <label class="field"><span class="field__lbl mono">E-mail *</span><input name="email" type="email" autocomplete="email" required></label>
+                  <label class="field"><span class="field__lbl mono">Compañía</span><input name="empresa" type="text" autocomplete="organization"></label>
+                  <label class="field"><span class="field__lbl mono">Teléfono</span><input name="telefono" type="tel" autocomplete="tel"></label>
+                  <label class="field field--full"><span class="field__lbl mono">Motivo de la consulta *</span>
+                    <select name="motivo" id="motivo" required>
+                      <option value="" disabled selected>Seleccioná una opción</option>
+                      <option>Me interesa implementar Odoo</option>
+                      <option>Me interesa implementar Oracle</option>
+                      <option>Me interesa implementar Siebel</option>
+                      <option>Consultoría en desarrollo de software a medida</option>
+                      <option>Consultoría para Testing y QA</option>
+                      <option>Consultoría para Análisis de Datos</option>
+                      <option>Consultoría para GIS</option>
+                      <option>Consultoría para Staffing IT</option>
+                      <option>Enviar CV</option>
+                      <option>Otros</option>
+                    </select>
+                  </label>
+                  <label class="field field--full"><span class="field__lbl mono">Mensaje *</span><textarea name="mensaje" rows="4" required></textarea></label>
+                </div>
+                <label class="check"><input type="checkbox" name="privacidad" required><span class="check__box"><svg class="i"><use href="#i-check"/></svg></span><span>Acepto la <a href="https://avatarinformatica.com/politicas-de-privacidad/" target="_blank" rel="noopener">Política de Privacidad</a></span></label>
+                <div class="form__foot">
+                  <p class="form__status mono" id="form-status" role="status" aria-live="polite"></p>
+                  <button type="submit" class="btn btn--primary magnetic">
+                    <span class="btn__label">Enviar el mensaje</span>
+                    <span class="btn__icon"><svg class="i"><use href="#i-arrow-ur"/></svg><svg class="i i--next"><use href="#i-arrow-ur"/></svg></span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="footer">
+        <div class="wrap">
+          <div class="footer__top">
+            <div class="footer__col">
+              <p class="mono t-dim">Secciones</p>
+              <a href="#equipo" data-scroll-link>Equipo</a><a href="#servicios" data-scroll-link>Servicios</a><a href="#soluciones" data-scroll-link>Soluciones</a><a href="#blog" data-scroll-link>Blog</a>
+            </div>
+            <div class="footer__col">
+              <p class="mono t-dim">Info</p>
+              <a href="https://avatarinformatica.com/condiciones-legales-de-navegacion/" target="_blank" rel="noopener">Aviso legal</a>
+              <a href="https://avatarinformatica.com/politicas-de-privacidad/" target="_blank" rel="noopener">Política de privacidad</a>
+              <a href="https://avatarinformatica.com/politicas-de-cookies/" target="_blank" rel="noopener">Política de cookies</a>
+              <a href="https://avatarinformatica.com/sitemap_index.xml" target="_blank" rel="noopener">Mapa del sitio</a>
+            </div>
+            <div class="footer__col">
+              <p class="mono t-dim">Contacto</p>
+              <a href="mailto:info@avatarinformatica.com.ar">info@avatarinformatica.com.ar</a>
+              <a href="tel:+595983111901">(+595) 983 111-901</a>
+              <span>Santa Fe – Buenos Aires, Argentina</span><span>Asunción, Paraguay</span>
+            </div>
+            <div class="footer__col footer__iso">
+              <a href="https://www.normas-iso.com/iso-9001/" target="_blank" rel="noopener" class="iso-badge" aria-label="Norma ISO 9001">
+                <span class="mono">ISO</span><b>9001</b>
+              </a>
+              <button class="to-top magnetic" type="button" id="to-top" aria-label="Volver arriba"><svg class="i"><use href="#i-arrow-d"/></svg></button>
+            </div>
+          </div>
+          <p class="footer__word" id="footer-word" aria-hidden="true"><span class="br">&lt;</span>avatar<span class="br">&gt;</span></p>
+          <div class="footer__bottom mono">
+            <span>Copyright © <span id="year">2026</span> Avatar Informática S.R.L. – Todos los Derechos Reservados</span>
+            <span class="t-dim">Software empresarial &amp; Servicios IT</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
